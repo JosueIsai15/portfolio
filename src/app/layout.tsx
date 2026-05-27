@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://josuegarcia.dev"),
+  metadataBase: new URL("https://portfolio-alpha-khaki-hjn0sxpphd.vercel.app"),
   title: {
     default: "Josué García | Frontend Developer",
     template: "%s | Josué García",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "Frontend Developer especializado en React, Next.js y TypeScript. Disponible para proyectos y empleo.",
     type: "website",
     locale: "es_ES",
-    url: "https://josuegarcia.dev",
+    url: "https://portfolio-alpha-khaki-hjn0sxpphd.vercel.app",
     siteName: "Josué García — Portfolio",
   },
   twitter: {
