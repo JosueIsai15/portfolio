@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# archivos originales en raíz (ya están en public/)
+*.pdf
+IMG-*.jpg
+
 # vercel
 .vercel
 
