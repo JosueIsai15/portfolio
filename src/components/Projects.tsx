@@ -10,45 +10,47 @@ import { useState } from "react";
 const projects = [
   {
     id: 1, featured: true,
-    title: "E-Commerce Platform",
-    description: "Plataforma full-stack con autenticación, carrito, pagos con Stripe y panel de admin. Arquitectura escalable con Next.js y Node.js.",
-    tags: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Stripe", "Tailwind"],
-    github: "#", live: "#", color: "#00f5ff", status: "Completado",
+    title: "FinTrack — Dashboard Financiero",
+    description: "App full-stack con autenticación real (Supabase Auth), gestión de ingresos y gastos por categorías, gráficas mensuales interactivas y datos privados por usuario mediante Row Level Security.",
+    tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Recharts", "Tailwind CSS"],
+    github: "https://github.com/JosueIsai15/fintrack",
+    live: "https://fintrack-iota-indol.vercel.app",
+    color: "#00f5ff", status: "Completado",
   },
   {
     id: 2, featured: false,
     title: "Dashboard Analytics",
     description: "Dashboard de analíticas en tiempo real con visualizaciones D3.js, filtros avanzados y exportación de reportes.",
-    tags: ["React", "TypeScript", "D3.js", "Python", "Django", "Redis"],
-    github: "#", live: "#", color: "#7b2fff", status: "Completado",
+    tags: ["React", "TypeScript", "D3.js", "Python", "Django"],
+    github: "#", live: "#", color: "#7b2fff", status: "Próximamente",
   },
   {
     id: 3, featured: false,
     title: "Task Management App",
     description: "App de tareas colaborativa con drag-and-drop, notificaciones en tiempo real y sincronización multi-dispositivo.",
     tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-    github: "#", live: "#", color: "#0080ff", status: "En desarrollo",
+    github: "#", live: "#", color: "#0080ff", status: "Próximamente",
   },
   {
     id: 4, featured: false,
     title: "API REST Microservices",
     description: "Arquitectura de microservicios con JWT, rate limiting, documentación Swagger y despliegue en Docker.",
     tags: ["Node.js", "Express", "Docker", "PostgreSQL", "JWT"],
-    github: "#", live: null, color: "#00f5ff", status: "Completado",
+    github: "#", live: null, color: "#00f5ff", status: "Próximamente",
   },
   {
     id: 5, featured: false,
     title: "Blog Platform",
     description: "Plataforma de blog con CMS propio, editor rich-text, tags y búsqueda full-text optimizada para SEO.",
     tags: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
-    github: "#", live: "#", color: "#7b2fff", status: "Completado",
+    github: "#", live: "#", color: "#7b2fff", status: "Próximamente",
   },
   {
     id: 6, featured: false,
     title: "CLI Automation Tool",
     description: "Herramienta CLI en Python para automatización de flujos de trabajo con configuración YAML y hooks.",
     tags: ["Python", "Click", "YAML", "Shell"],
-    github: "#", live: null, color: "#0080ff", status: "Completado",
+    github: "#", live: null, color: "#0080ff", status: "Próximamente",
   },
 ];
 
@@ -79,13 +81,15 @@ function Card({ p, delay }: { p: typeof projects[0]; delay: number }) {
               </h3>
             </div>
             <div className="flex gap-1.5 shrink-0 mt-1">
-              <motion.a href={p.github} aria-label="GitHub"
-                className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-[#00f5ff] hover:border-[#00f5ff]/40 transition-all"
-                whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <GithubIcon size={14} />
-              </motion.a>
-              {p.live && (
-                <motion.a href={p.live} aria-label="Demo"
+              {p.github !== "#" && (
+                <motion.a href={p.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-[#00f5ff] hover:border-[#00f5ff]/40 transition-all"
+                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <GithubIcon size={14} />
+                </motion.a>
+              )}
+              {p.live && p.live !== "#" && (
+                <motion.a href={p.live} aria-label="Demo" target="_blank" rel="noopener noreferrer"
                   className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-[#00f5ff] hover:border-[#00f5ff]/40 transition-all"
                   whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                   <ExternalLink size={14} />
@@ -152,12 +156,12 @@ export default function Projects() {
                 </div>
               </div>
               <div className="flex md:flex-col gap-3">
-                <motion.a href={featured.github}
+                <motion.a href={featured.github} target="_blank" rel="noopener noreferrer"
                   className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-white/10 text-slate-300 hover:text-[#00f5ff] hover:border-[#00f5ff]/35 font-mono text-sm transition-all"
                   whileHover={{ scale: 1.02 }}>
                   <GithubIcon size={14} /> Código
                 </motion.a>
-                <motion.a href={featured.live ?? "#"}
+                <motion.a href={featured.live ?? "#"} target="_blank" rel="noopener noreferrer"
                   className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#00f5ff]/12 border border-[#00f5ff]/25 text-[#00f5ff] font-mono text-sm hover:bg-[#00f5ff]/20 transition-all"
                   whileHover={{ scale: 1.02 }}>
                   <ExternalLink size={14} /> Demo
