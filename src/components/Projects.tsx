@@ -19,10 +19,12 @@ const projects = [
   },
   {
     id: 2, featured: false,
-    title: "Dashboard Analytics",
-    description: "Dashboard de analíticas en tiempo real con visualizaciones D3.js, filtros avanzados y exportación de reportes.",
-    tags: ["React", "TypeScript", "D3.js", "Python", "Django"],
-    github: "#", live: "#", color: "#7b2fff", status: "Próximamente",
+    title: "CineTrack — Descubre Películas y Series",
+    description: "App de descubrimiento de cine con hero animado, búsqueda en tiempo real, tráilers en modal, watchlist persistente y páginas de detalle con reparto. Consume la API de TMDB con ISR.",
+    tags: ["Next.js", "TypeScript", "TMDB API", "Framer Motion", "Tailwind CSS"],
+    github: "https://github.com/JosueIsai15/cinetrack",
+    live: "https://cinetrack-omega-wine.vercel.app",
+    color: "#7b2fff", status: "Completado",
   },
   {
     id: 3, featured: false,
