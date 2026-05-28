@@ -7,48 +7,62 @@ import { ExternalLink, ArrowRight } from "lucide-react";
 import { GithubIcon } from "./SocialIcons";
 import { useState } from "react";
 
-const projects = [
+const featured = [
   {
-    id: 1, featured: true,
+    id: 1,
     title: "FinTrack — Dashboard Financiero",
     description: "App full-stack con autenticación real (Supabase Auth), gestión de ingresos y gastos por categorías, gráficas mensuales interactivas y datos privados por usuario mediante Row Level Security.",
     tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Recharts", "Tailwind CSS"],
     github: "https://github.com/JosueIsai15/fintrack",
     live: "https://fintrack-iota-indol.vercel.app",
-    color: "#00f5ff", status: "Completado",
+    color: "#00f5ff",
+    gradient: "from-[#00f5ff] via-[#0080ff] to-[#7b2fff]",
+    glow: "#00f5ff",
+    badge: "Full Stack · Auth · BD",
   },
   {
-    id: 2, featured: false,
-    title: "CineTrack — Descubre Películas y Series",
+    id: 2,
+    title: "CineTrack — Películas & Series",
     description: "App de descubrimiento de cine con hero animado, búsqueda en tiempo real, tráilers en modal, watchlist persistente y páginas de detalle con reparto. Consume la API de TMDB con ISR.",
     tags: ["Next.js", "TypeScript", "TMDB API", "Framer Motion", "Tailwind CSS"],
     github: "https://github.com/JosueIsai15/cinetrack",
     live: "https://cinetrack-omega-wine.vercel.app",
-    color: "#7b2fff", status: "Completado",
+    color: "#7b2fff",
+    gradient: "from-[#7b2fff] via-[#a855f7] to-[#0080ff]",
+    glow: "#7b2fff",
+    badge: "API Externa · ISR · Streaming",
   },
   {
-    id: 3, featured: false,
+    id: 3,
+    title: "CodeLens — AI Code Analysis",
+    description: "Herramienta de análisis de código con IA. Editor Monaco (VS Code), 4 modos de análisis (Review, Explicar, Optimizar, Seguridad), respuestas en streaming con Groq Llama 3.3 70B.",
+    tags: ["Next.js", "TypeScript", "Groq API", "Monaco Editor", "Framer Motion"],
+    github: "https://github.com/JosueIsai15/codelens",
+    live: "https://codelens-inky.vercel.app",
+    color: "#0080ff",
+    gradient: "from-[#0080ff] via-[#00f5ff] to-[#7b2fff]",
+    glow: "#0080ff",
+    badge: "IA · Streaming · Dev Tool",
+  },
+];
+
+const upcoming = [
+  {
+    id: 4,
     title: "Task Management App",
     description: "App de tareas colaborativa con drag-and-drop, notificaciones en tiempo real y sincronización multi-dispositivo.",
     tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-    github: "#", live: "#", color: "#0080ff", status: "Próximamente",
+    github: "#", live: "#", color: "#00f5ff", status: "Próximamente",
   },
   {
-    id: 4, featured: false,
+    id: 5,
     title: "API REST Microservices",
     description: "Arquitectura de microservicios con JWT, rate limiting, documentación Swagger y despliegue en Docker.",
     tags: ["Node.js", "Express", "Docker", "PostgreSQL", "JWT"],
-    github: "#", live: null, color: "#00f5ff", status: "Próximamente",
+    github: "#", live: null, color: "#7b2fff", status: "Próximamente",
   },
   {
-    id: 5, featured: false,
-    title: "Blog Platform",
-    description: "Plataforma de blog con CMS propio, editor rich-text, tags y búsqueda full-text optimizada para SEO.",
-    tags: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
-    github: "#", live: "#", color: "#7b2fff", status: "Próximamente",
-  },
-  {
-    id: 6, featured: false,
+    id: 6,
     title: "CLI Automation Tool",
     description: "Herramienta CLI en Python para automatización de flujos de trabajo con configuración YAML y hooks.",
     tags: ["Python", "Click", "YAML", "Shell"],
@@ -56,10 +70,7 @@ const projects = [
   },
 ];
 
-const featured = projects[0];
-const rest = projects.slice(1);
-
-function Card({ p, delay }: { p: typeof projects[0]; delay: number }) {
+function UpcomingCard({ p, delay }: { p: typeof upcoming[0]; delay: number }) {
   return (
     <AnimateOnScroll delay={delay} direction="up">
       <motion.div
@@ -70,35 +81,15 @@ function Card({ p, delay }: { p: typeof projects[0]; delay: number }) {
       >
         <div className="h-0.5" style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }} />
         <div className="p-6 flex flex-col flex-1 gap-4">
-          <div className="flex items-start justify-between gap-2">
-            <div className="space-y-1.5 flex-1 min-w-0">
-              <span
-                className="inline-block text-xs font-mono px-2.5 py-0.5 rounded-full"
-                style={{ color: p.color, background: `${p.color}12`, border: `1px solid ${p.color}30` }}
-              >
-                {p.status}
-              </span>
-              <h3 className="text-white font-bold text-base leading-snug group-hover:text-[#00f5ff] transition-colors">
-                {p.title}
-              </h3>
-            </div>
-            <div className="flex gap-1.5 shrink-0 mt-1">
-              {p.github !== "#" && (
-                <motion.a href={p.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-[#00f5ff] hover:border-[#00f5ff]/40 transition-all"
-                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <GithubIcon size={14} />
-                </motion.a>
-              )}
-              {p.live && p.live !== "#" && (
-                <motion.a href={p.live} aria-label="Demo" target="_blank" rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-[#00f5ff] hover:border-[#00f5ff]/40 transition-all"
-                  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <ExternalLink size={14} />
-                </motion.a>
-              )}
-            </div>
-          </div>
+          <span
+            className="inline-block w-fit text-xs font-mono px-2.5 py-0.5 rounded-full"
+            style={{ color: p.color, background: `${p.color}12`, border: `1px solid ${p.color}30` }}
+          >
+            {p.status}
+          </span>
+          <h3 className="text-white font-bold text-base leading-snug group-hover:text-[#00f5ff] transition-colors">
+            {p.title}
+          </h3>
           <p className="text-slate-300 text-sm leading-relaxed flex-1 line-clamp-3">{p.description}</p>
           <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
             {p.tags.map(t => (
@@ -115,7 +106,7 @@ function Card({ p, delay }: { p: typeof projects[0]; delay: number }) {
 
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
-  const visible = showAll ? rest : rest.slice(0, 3);
+  const visibleUpcoming = showAll ? upcoming : upcoming.slice(0, 3);
 
   return (
     <Section id="proyectos">
@@ -130,60 +121,107 @@ export default function Projects() {
         </div>
       </AnimateOnScroll>
 
-      {/* Featured */}
-      <AnimateOnScroll delay={0.05}>
-        <motion.div
-          className="glow-card rounded-2xl overflow-hidden mb-16"
-          style={{ borderColor: "rgba(0,245,255,0.2)" }}
-          whileHover={{ borderColor: "rgba(0,245,255,0.4)" }}
-          transition={{ duration: 0.25 }}
-        >
-          <div className="h-0.5 bg-gradient-to-r from-[#00f5ff] via-[#7b2fff] to-[#0080ff]" />
-          <div className="p-8 md:p-10 relative overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#00f5ff]/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="relative z-10 grid md:grid-cols-[1fr_180px] gap-8 items-start">
-              <div className="space-y-5">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-[#00f5ff] shadow-[0_0_8px_#00f5ff] animate-pulse" />
-                  <span className="font-mono text-[#00f5ff]/70 text-xs tracking-[0.2em] uppercase">Proyecto Destacado</span>
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white">{featured.title}</h3>
-                <p className="text-slate-300 leading-relaxed text-base">{featured.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {featured.tags.map(t => (
-                    <span key={t} className="px-3 py-1 text-xs font-mono rounded-lg text-[#00f5ff] bg-[#00f5ff]/10 border border-[#00f5ff]/25">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="flex md:flex-col gap-3">
-                <motion.a href={featured.github} target="_blank" rel="noopener noreferrer"
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-white/10 text-slate-300 hover:text-[#00f5ff] hover:border-[#00f5ff]/35 font-mono text-sm transition-all"
-                  whileHover={{ scale: 1.02 }}>
-                  <GithubIcon size={14} /> Código
-                </motion.a>
-                <motion.a href={featured.live ?? "#"} target="_blank" rel="noopener noreferrer"
-                  className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#00f5ff]/12 border border-[#00f5ff]/25 text-[#00f5ff] font-mono text-sm hover:bg-[#00f5ff]/20 transition-all"
-                  whileHover={{ scale: 1.02 }}>
-                  <ExternalLink size={14} /> Demo
-                </motion.a>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </AnimateOnScroll>
+      {/* Featured projects — todos destacados */}
+      <div className="space-y-8 mb-20">
+        {featured.map((p, i) => (
+          <AnimateOnScroll key={p.id} delay={i * 0.08}>
+            <motion.div
+              className="glow-card rounded-2xl overflow-hidden"
+              style={{ borderColor: `${p.glow}22` }}
+              whileHover={{ borderColor: `${p.glow}44` }}
+              transition={{ duration: 0.25 }}
+            >
+              <div className={`h-0.5 bg-gradient-to-r ${p.gradient}`} />
+              <div className="p-8 md:p-10 relative overflow-hidden">
+                {/* Ambient glow */}
+                <div
+                  className="absolute -top-24 -right-24 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-50"
+                  style={{ background: `${p.glow}08` }}
+                />
+                <div className="relative z-10 grid md:grid-cols-[1fr_200px] gap-8 items-start">
+                  {/* Info */}
+                  <div className="space-y-5">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="w-2 h-2 rounded-full animate-pulse shadow-lg"
+                          style={{ background: p.color, boxShadow: `0 0 8px ${p.color}` }}
+                        />
+                        <span className="font-mono text-xs tracking-[0.2em] uppercase" style={{ color: `${p.color}99` }}>
+                          Proyecto Destacado
+                        </span>
+                      </div>
+                      <span
+                        className="text-xs font-mono px-2.5 py-0.5 rounded-full border"
+                        style={{ color: p.color, background: `${p.color}12`, borderColor: `${p.color}30` }}
+                      >
+                        {p.badge}
+                      </span>
+                    </div>
 
-      {/* Grid */}
+                    <h3 className="text-2xl md:text-3xl font-bold text-white">{p.title}</h3>
+                    <p className="text-slate-300 leading-relaxed text-base">{p.description}</p>
+
+                    <div className="flex flex-wrap gap-2">
+                      {p.tags.map(t => (
+                        <span
+                          key={t}
+                          className="px-3 py-1 text-xs font-mono rounded-lg border"
+                          style={{ color: p.color, background: `${p.color}10`, borderColor: `${p.color}25` }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex md:flex-col gap-3">
+                    <motion.a
+                      href={p.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border border-white/10 text-slate-300 hover:text-white hover:border-white/25 font-mono text-sm transition-all"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <GithubIcon size={15} /> Código
+                    </motion.a>
+                    <motion.a
+                      href={p.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl border font-mono text-sm transition-all"
+                      style={{
+                        background: `${p.color}15`,
+                        borderColor: `${p.color}35`,
+                        color: p.color,
+                      }}
+                      whileHover={{ scale: 1.02, backgroundColor: `${p.color}25` }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <ExternalLink size={15} /> Demo en vivo
+                    </motion.a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimateOnScroll>
+        ))}
+      </div>
+
+      {/* Upcoming */}
       <AnimateOnScroll direction="none">
-        <p className="font-mono text-slate-500 text-xs tracking-[0.2em] uppercase text-center mb-10">— Más proyectos —</p>
+        <p className="font-mono text-slate-500 text-xs tracking-[0.2em] uppercase text-center mb-10">— En construcción —</p>
       </AnimateOnScroll>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {visible.map((p, i) => <Card key={p.id} p={p} delay={i * 0.07} />)}
+        {visibleUpcoming.map((p, i) => (
+          <UpcomingCard key={p.id} p={p} delay={i * 0.07} />
+        ))}
       </div>
 
-      {!showAll && rest.length > 3 && (
+      {!showAll && upcoming.length > 3 && (
         <AnimateOnScroll direction="none" delay={0.1}>
           <div className="flex justify-center">
             <motion.button
@@ -191,7 +229,7 @@ export default function Projects() {
               className="inline-flex items-center gap-2 font-mono text-sm text-slate-400 hover:text-[#00f5ff] transition-colors group"
               whileHover={{ y: -1 }}
             >
-              Ver todos los proyectos
+              Ver todos
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </motion.button>
           </div>
